@@ -61,7 +61,19 @@ public class HdfsClient {
      */
     @Test
     public void testPut() throws IOException {
-        // 参数1: 表示删除原数据,参数2: 是否允许覆盖, 参数3: 原数据路径, 参数4:目的路径
+        // 参数1: 表示删除原数据, 参数2: 是否允许覆盖, 参数3: 原数据路径, 参数4:目的路径
         fs.copyFromLocalFile(false, true, new Path("F:\\sunwukong.txt"), new Path("/xiyou/huaguoshan"));
+    }
+
+    /**
+     * 下载文件
+     */
+    @Test
+    public void testGet() throws IOException {
+        // 参数1:下载后源文件是否删除, 参数2:HDFS原文件路径, 参数3: 目标地址路径windows, 参数4: 开启本地文件校验
+
+        fs.copyToLocalFile(true, new Path("/xiyou/huaguoshan/"), new Path("F:\\"), true);
+        // 校验为 false 时, 下载后文件后, 可以看到有一个 crc 校验文件
+        // 校验为 true 时, 没有 crc 文件
     }
 }
