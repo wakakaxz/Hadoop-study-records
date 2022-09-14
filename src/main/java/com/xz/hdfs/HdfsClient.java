@@ -30,6 +30,7 @@ public class HdfsClient {
         // 创建一个配置文件
         Configuration configuration = new Configuration();
 
+        configuration.set("dfs.replication", "2");
 
         // 用户
         String user = "xz";
@@ -43,10 +44,24 @@ public class HdfsClient {
         fs.close();
     }
 
+    /**
+     * 创建文件夹
+     */
     @Test
     public void testMkdirs() throws URISyntaxException, IOException, InterruptedException {
-        // 2. 创建文件夹
         fs.mkdirs(new Path("/xiyou/流沙河"));
 
+    }
+
+    /**
+     * 上传文件
+     *
+     * 参数优先级: hdfs-default.xml < hdfs-site.xml < 本地资源目录下的配置文件优先级 < 代码中的 configuration.set() 优先级
+     * 新建 hdfs-site.xml 测试优先级
+     */
+    @Test
+    public void testPut() throws IOException {
+        // 参数1: 表示删除原数据,参数2: 是否允许覆盖, 参数3: 原数据路径, 参数4:目的路径
+        fs.copyFromLocalFile(false, true, new Path("F:\\sunwukong.txt"), new Path("/xiyou/huaguoshan"));
     }
 }
