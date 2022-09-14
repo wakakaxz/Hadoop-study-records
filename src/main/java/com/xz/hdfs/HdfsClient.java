@@ -1,8 +1,7 @@
 package com.xz.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +9,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 /**
  * @author xz
@@ -55,7 +55,7 @@ public class HdfsClient {
 
     /**
      * 上传文件
-     *
+     * <p>
      * 参数优先级: hdfs-default.xml < hdfs-site.xml < 本地资源目录下的配置文件优先级 < 代码中的 configuration.set() 优先级
      * 新建 hdfs-site.xml 测试优先级
      */
@@ -110,5 +110,31 @@ public class HdfsClient {
 
         // 文件目录更名
         fs.rename(new Path("/input2"), new Path("/input"));
+    }
+
+    /**
+     * 获取文件信息
+     */
+    @Test
+    public void fileDetail() throws IOException {
+        RemoteIterator<LocatedFileStatus> listFiles = fs.listFiles(new Path("/"), true);
+        while (listFiles.hasNext()) {
+            LocatedFileStatus fileStatus = listFiles.next();
+            System.out.println("======" + fileStatus.getPath() + "======");
+            System.out.println(fileStatus.getPermission());
+            System.out.println(fileStatus.getOwner());
+            System.out.println(fileStatus.getGroup());
+            System.out.println(fileStatus.getLen());
+            System.out.println(fileStatus.getModificationTime()); //修改时间
+            System.out.println(fileStatus.getReplication());    // 副本数
+            System.out.println(fileStatus.getBlockSize());      // 块大小
+            System.out.println(fileStatus.getPath().getName());
+
+            // 获取块信息
+            BlockLocation[] blockLocations = fileStatus.getBlockLocations();
+            // 存储块 起始位置, 末尾位置, 存储块的节点 .... 起始位置, 末尾位置, 存储块的节点 ....
+            System.out.println(Arrays.toString(blockLocations));
+
+        }
     }
 }
