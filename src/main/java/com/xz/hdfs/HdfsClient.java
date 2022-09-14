@@ -76,4 +76,22 @@ public class HdfsClient {
         // 校验为 false 时, 下载后文件后, 可以看到有一个 crc 校验文件
         // 校验为 true 时, 没有 crc 文件
     }
+
+    /**
+     * 删除文件
+     */
+    @Test
+    public void testRm() throws IOException {
+        // 参数1: 要删除的路径, 参数2: 是否递归删除
+
+        // 删除文件
+//        fs.delete(new Path("/jinguo/wuguo.txt"), false);
+
+        // 删除空目录
+//        fs.delete(new Path("/xiyou"), false);
+
+        // 删除非空目录
+        fs.delete(new Path("/jinguo"), true);
+        // 不递归删除会报异常: /jinguo is non empty'
+    }
 }
