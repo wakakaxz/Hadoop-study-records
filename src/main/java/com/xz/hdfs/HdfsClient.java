@@ -94,4 +94,21 @@ public class HdfsClient {
         fs.delete(new Path("/jinguo"), true);
         // 不递归删除会报异常: /jinguo is non empty'
     }
+
+    /**
+     * 文件更名和移动
+     */
+    @Test
+    public void testMv() throws IOException {
+        // 参数1: 原文件路径, 参数2: 目标文件路径
+
+        // 文件名称修改
+//        fs.rename(new Path("/input/word.txt"), new Path("/input/wcword.txt"));
+
+        // 文件更名和移动
+//        fs.rename(new Path("/input/wcword.txt"), new Path("/word.txt"));
+
+        // 文件目录更名
+        fs.rename(new Path("/input2"), new Path("/input"));
+    }
 }
