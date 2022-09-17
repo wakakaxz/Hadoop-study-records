@@ -32,7 +32,7 @@ public class FlowDriver {
 
         // 6. 设置数据的输入路径和输出路径
         FileInputFormat.setInputPaths(job, new Path("F:\\output\\outputFlow"));
-        FileOutputFormat.setOutputPath(job, new Path("F:\\output\\outputWritableComparable"));
+        FileOutputFormat.setOutputPath(job, new Path("F:\\output\\outputWritableComparable2"));
 
         // 7. 提交 job
         boolean result = job.waitForCompletion(true);

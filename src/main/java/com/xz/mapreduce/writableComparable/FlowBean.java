@@ -27,6 +27,11 @@ public class FlowBean implements WritableComparable<FlowBean> {
 
     @Override
     public int compareTo(FlowBean flowBean) {
+        if (this.sumFlow == flowBean.sumFlow) {
+
+            return this.upFlow > flowBean.upFlow ? 1 : -1;
+        }
+
         return this.sumFlow > flowBean.sumFlow ? -1 : 1;
     }
 
