@@ -15,7 +15,7 @@ public class TableMapper extends Mapper<LongWritable, Text, Text, TableBean> {
     private TableBean outV = new TableBean();
 
     /**
-     * 只执行一次
+     * 每个只执行一次
      */
     @Override
     protected void setup(Mapper<LongWritable, Text, Text, TableBean>.Context context) throws IOException, InterruptedException {

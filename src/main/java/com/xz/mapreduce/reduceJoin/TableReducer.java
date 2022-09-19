@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableReducer extends Reducer<Text, TableBean, TableBean, NullWritable> {
+
+    /**
+     * 每个相同的 key 执行一次
+     * */
     @Override
     protected void reduce(Text key, Iterable<TableBean> values, Reducer<Text, TableBean, TableBean, NullWritable>.Context context) throws IOException, InterruptedException {
         List<TableBean> orderBeans = new ArrayList<>();
